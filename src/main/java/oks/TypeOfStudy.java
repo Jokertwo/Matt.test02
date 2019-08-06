@@ -7,7 +7,7 @@ package oks;
  *
  */
 
-public enum TypStudia {
+public enum TypeOfStudy {
   BACHELOR("B", "Bakalářský"), FOLLOW_UP("N", "Navazující"),
   DOCTORAL("P", "Doktorský"), MASTER("M", "Magisterský"),
   INVALID(Constants.SIGN_ERROR, "neplatný");
@@ -24,7 +24,7 @@ public enum TypStudia {
    * @param shortCut abbreviation of the type of study
    * @param name name of the type of study
    */
-  private TypStudia(String shortCut, String name) {
+  TypeOfStudy(String shortCut, String name) {
     this.shortCut = shortCut;
     this.name = name;
   }
