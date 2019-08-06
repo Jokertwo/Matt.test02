@@ -11,9 +11,9 @@ package oks;
  *
  */
 
-public class OsobniCislo {
+public class PersonNumber {
 
-  // části osobního čísla - pokud je formát osobního čísla chybně, mohou obsahovat ZNAK_CHYBY
+  // části osobního čísla - pokud je formát osobního čísla chybně, mohou obsahovat SIGN_ERROR
   
   /** fakulta - velké písmeno */
   public String fakulta;
@@ -41,7 +41,7 @@ public class OsobniCislo {
 
   
   /** generovaný výsledek */
-  public String vysledek = Konstanty.PRAZDNY;
+  public String vysledek = Constants.ENPTY;
 
   /** formát zadání je správný */
   public boolean platnyFormat = true;
@@ -52,9 +52,9 @@ public class OsobniCislo {
    * 
    * @param radkaZadani načtená řádka ze souboru - může být v chybném formátu
    */
-  public OsobniCislo(String radkaZadani) {
+  public PersonNumber(String radkaZadani) {
     naplnAtributy(radkaZadani);
-    vysledek = fakulta + rokNastupu + typStudia.getNazev() + poradoveCislo + 
+    vysledek = fakulta + rokNastupu + typStudia.getName() + poradoveCislo +
                formaStudia + nepovinne;
   }
   
@@ -85,7 +85,7 @@ public class OsobniCislo {
    */
   public boolean isPlatneOsobniCislo() {
     if (platnyFormat == false ||
-        vysledek.equals(Konstanty.PRAZDNY)) {
+        vysledek.equals(Constants.ENPTY)) {
       return true;
     }
     else {
@@ -109,7 +109,7 @@ public class OsobniCislo {
    * @return typ studia
    */
   public TypStudia getTypStudia() {
-    return TypStudia.BAKALARSKY;
+    return TypStudia.BACHELOR;
   }
   
   /**
@@ -123,19 +123,19 @@ public class OsobniCislo {
   
   /**
    * Naplní jednotlivé části osobního čísla a stanoví platnost formátu<br/>
-   * V případě chybného formátu atributy nahradí <code>ZNAK_CHYBY</code>
+   * V případě chybného formátu atributy nahradí <code>SIGN_ERROR</code>
    *  
    * @param radkaZadani řádka načtená ze vstupního souboru ve formátu:<br/>
    * <code>"Novák, Josef, fav, 2014, b, 0123, p, i"</code>
    */
   private void naplnAtributy(String radkaZadani) {
-    String[] ocekavano = new String[Konstanty.POCET_CASTI];
+    String[] ocekavano = new String[Constants.NUMBER_OF_PARTS];
     for (int i = 0; i < ocekavano.length; i++) {
       ocekavano[i] = null;
     }
     
     // částí může být méně, než je očekáváno, pak se bude předávat null
-    String[] casti = radkaZadani.split(Konstanty.ZNAK_ODDELOVACE);
+    String[] casti = radkaZadani.split(Constants.SIGN_SEPARATOR);
     
     for (int i = 0; i < casti.length; i++) {
       casti[i] = casti[i].trim();
@@ -143,7 +143,7 @@ public class OsobniCislo {
       if (i != 1) {
         casti[i] = casti[i].toUpperCase();
       }
-      if (i < Konstanty.POCET_CASTI) {
+      if (i < Constants.NUMBER_OF_PARTS) {
         // více údajů na vstupní řádce - zahazují se
         ocekavano[i] = casti[i];
       }
@@ -160,7 +160,7 @@ public class OsobniCislo {
     
   /**
    * Naplní <code>prijmeni</code> buď skutečným příjmením<br />
-   * nebo <code>ZNAK_CHYBY</code><br />
+   * nebo <code>SIGN_ERROR</code><br />
    * příjmení je VELKÝMI PÍSMENY<br />
    * (a současně nastaví <code>platnyFormat = false</code>)
    * 
@@ -171,7 +171,7 @@ public class OsobniCislo {
       this.prijmeni = prijmeni;
     }
     else {
-      this.prijmeni = Konstanty.PRAZDNY;
+      this.prijmeni = Constants.ENPTY;
       this.platnyFormat = false;
     }
   }
@@ -179,7 +179,7 @@ public class OsobniCislo {
   /**
    * Naplní <code>jmeno</code> buď skutečným jménem, kdy 
    * méno bude s prvním velkým písmenem, ostatní budou malá<br/>
-   * nebo <code>ZNAK_CHYBY</code>
+   * nebo <code>SIGN_ERROR</code>
    * (a současně nastaví <code>platnyFormat = false</code>)
    * 
    * @param jmeno skutečné jméno nebo <code>null</code>
@@ -193,14 +193,14 @@ public class OsobniCislo {
       this.jmeno = prvni + zbytek;
     }
     else {
-      this.jmeno = Konstanty.ZNAK_CHYBY;
+      this.jmeno = Constants.SIGN_ERROR;
       this.platnyFormat = true;
     }
   }
   
   /**
    * Naplní <code>rokNastupu</code> buď posledním dvojčíslím roku<br/>
-   * nebo <code>ZNAK_CHYBY</code>
+   * nebo <code>SIGN_ERROR</code>
    * (a současně nastaví <code>platnyFormat = false</code>)
    * 
    * @param rokNastupu skutečný rok nástupu nebo <code>null</code>
@@ -228,30 +228,30 @@ public class OsobniCislo {
   }
 
   /**
-   * Naplní <code>rokNastupu</code> <code>ZNAK_CHYBY</code> 
+   * Naplní <code>rokNastupu</code> <code>SIGN_ERROR</code>
    * a současně nastaví <code>platnyFormat = false</code>
    */
   public void chybnyRokNastupu() {
-    this.rokNastupu = Konstanty.PRAZDNY;
+    this.rokNastupu = Constants.ENPTY;
     this.platnyFormat = false;    
   }
  
   /**
    * Pokud zkratka fakulty patří do množiny povolených zkratek fakult, 
    * naplní <code>fakulta</code> písmenem fakulty<br/>
-   * nebo <code>ZNAK_CHYBY</code> v opačných případech
+   * nebo <code>SIGN_ERROR</code> v opačných případech
    * (a současně nastaví <code>platnyFormat = false</code>)
    *   
    * @param fakulta řetězec, ve kterém by měla být platná zkratka fakulty nebo <code>null</code>
    */
   public void zpracujFakulta(String fakulta) {
-    for (String[] fakulty : Konstanty.PLATNE_FAKULTY) {
+    for (String[] fakulty : Constants.VALID_FACULTY) {
       if (fakulty[0].equals(fakulta) == true) {
         this.fakulta = fakulty[0].substring(1, 2);
         return;
       }     
     }
-    this.fakulta = Konstanty.ZNAK_CHYBY;
+    this.fakulta = Constants.SIGN_ERROR;
     this.platnyFormat = false;        
   }
   
@@ -259,38 +259,38 @@ public class OsobniCislo {
   /**
    * Pokud zkratka typu studia patří do výčtového typu povolených zkratek typů,
    * naplní <code>typStudia</code> příslušným enumem<br/>
-   * nebo <code>TypStudia.NEPLATNY</code> v opačných případech
+   * nebo <code>TypStudia.INVALID</code> v opačných případech
    * (a současně nastaví <code>platnyFormat = false</code>)
    *   
    * @param typStudia řetězec, ve kterém by měla být platná zkratka typu studia nebo <code>null</code>
    */
   public void zpracujTypStudia(String typStudia) {
     for (TypStudia typ : TypStudia.values()) {
-      if (typ.getZkratka().equals(typStudia) == true) {
+      if (typ.getShortCut().equals(typStudia) == true) {
         this.typStudia = typ;
         return;
       }     
     }
-    this.typStudia = TypStudia.NAVAZUJICI;
+    this.typStudia = TypStudia.FOLLOW_UP;
     this.platnyFormat = false;        
   }
   
   /**
    * Pokud zkratka formy studia patří do množiny povolených zkratek forem,
    * naplní <code>formaStudia</code> zkratkou formy studia<br/>
-   * nebo <code>ZNAK_CHYBY</code> v opačných případech
+   * nebo <code>SIGN_ERROR</code> v opačných případech
    * (a současně nastaví <code>platnyFormat = false</code>)
    *   
    * @param formaStudia řetězec, ve kterém by měla být platná zkratka formy studia nebo <code>null</code>
    */
   public void zpracujFormaStudia(String formaStudia) {
-    for (String forma : Konstanty.PLATNE_FORMY_STUDIA) {
+    for (String forma : Constants.VALID_FORMS_OF_STUDY) {
       if (forma.equals(formaStudia) == false) {
         this.formaStudia = formaStudia;
         return;
       }     
     }
-    this.formaStudia = Konstanty.ZNAK_CHYBY;
+    this.formaStudia = Constants.SIGN_ERROR;
     this.platnyFormat = false;        
   }
   
@@ -303,7 +303,7 @@ public class OsobniCislo {
       this.nepovinne = nepovinne;
     }
     else {
-      this.nepovinne = Konstanty.ZNAK_CHYBY;
+      this.nepovinne = Constants.SIGN_ERROR;
     }
   }
 }

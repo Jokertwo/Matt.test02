@@ -1,49 +1,49 @@
 package oks;
 
 /**
- * Platné typy studia a jejich zkratky
+ * Valid types of studies and their abbreviations
  * 
  * @author P.Herout
  *
  */
 
 public enum TypStudia {
-  BAKALARSKY("B", "Bakalářský"), NAVAZUJICI("N", "Navazující"), 
-  DOKTORSKY("P", "Doktorský"), MAGISTERSKY("M", "Magisterský"),
-  NEPLATNY(Konstanty.ZNAK_CHYBY, "neplatný");
+  BACHELOR("B", "Bakalářský"), FOLLOW_UP("N", "Navazující"),
+  DOCTORAL("P", "Doktorský"), MASTER("M", "Magisterský"),
+  INVALID(Constants.SIGN_ERROR, "neplatný");
   
-  /** zkratka typu studia */
-  private final String zkratka;
+  /** abbreviation of the type of study */
+  private final String shortCut;
   
-  /** název typu studia */
-  private final String nazev;
+  /** name of the type of study */
+  private final String name;
   
   /**
-   * Naplní hodnotu výčtového typu dalšími informacemi
+   * Fills an enum type value with additional information
    * 
-   * @param zkratka zkratka typu studia
-   * @param nazev název typu studia
+   * @param shortCut abbreviation of the type of study
+   * @param name name of the type of study
    */
-  private TypStudia(String zkratka, String nazev) {
-    this.zkratka = zkratka;
-    this.nazev = nazev;
+  private TypStudia(String shortCut, String name) {
+    this.shortCut = shortCut;
+    this.name = name;
   }
 
   /**
-   * Vrací zkratku typu studia
+   * Returns the type of study abbreviation
    * 
-   * @return zkratka typu studia
+   * @return abbreviation of the type of study
    */
-  public String getZkratka() {
-    return zkratka;
+  public String getShortCut() {
+    return shortCut;
   }
   
   /**
-   * Vrací název typu studia
+   * Returns the name of the study type
    * 
-   * @return název typu studia
+   * @return name of the type of study
    */
-  public String getNazev() {
-    return nazev;
+  public String getName() {
+    return name;
   }
 }
