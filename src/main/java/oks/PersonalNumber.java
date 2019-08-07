@@ -178,7 +178,7 @@ public class PersonalNumber {
 
     /**
      * Fill in the <code> surname </code> with either the real surname
-     * <br /> or the <code> SIGN_ERROR </code> <br /> surname is CAPITAL LETTERS <br />
+     * <br /> or the <code> SIGN_ERROR </code> <br />. Surname is CAPITAL LETTERS <br />
      * (and can be set to <code> isCorretFormat = false </ code >)
      *
      * @param surname name or <code> null </code>
@@ -194,7 +194,7 @@ public class PersonalNumber {
 
     /**
      * It populates <code> name </code> with either the real name when
-     * less with the first capital letter, others with lowercase <br/>
+     * the name will be with first capital letter, others with lowercase <br/>
      * or <code> SIGN_ERROR </code>
      * (and set <code> isCorretFormat = false </code>)
      *
