@@ -58,7 +58,7 @@ public class PersonalNumber {
     /**
      * generated result
      */
-    public String result = Constants.ENPTY;
+    public String result = Constants.EMPTY;
 
     /**
      * the input format is correct
@@ -84,7 +84,7 @@ public class PersonalNumber {
      */
     @Override
     public String toString() {
-        return "A14B0123P <= NOVÁK, Josef";
+        return "A14B0123P <= NOVAK, Josef";
     }
 
     /**
@@ -103,8 +103,8 @@ public class PersonalNumber {
      * or <code> false </code> if the personal number has not yet been generated or one of the formats is invalid
      */
     public boolean isValidPersonNumber() {
-        if (isCorretFormat == false ||
-                result.equals(Constants.ENPTY)) {
+        if (!isCorretFormat ||
+                result.equals(Constants.EMPTY)) {
             return true;
         } else {
             return false;
@@ -187,7 +187,7 @@ public class PersonalNumber {
         if (surname != null) {
             this.surname = surname;
         } else {
-            this.surname = Constants.ENPTY;
+            this.surname = Constants.EMPTY;
             this.isCorretFormat = false;
         }
     }
@@ -247,7 +247,7 @@ public class PersonalNumber {
      * while setting <code> isCorretFormat = false </code>
      */
     public void wrongArrivalYear() {
-        this.arrivalYear = Constants.ENPTY;
+        this.arrivalYear = Constants.EMPTY;
         this.isCorretFormat = false;
     }
 

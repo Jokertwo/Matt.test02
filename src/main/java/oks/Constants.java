@@ -34,7 +34,7 @@ public class Constants {
   public static final String SIGN_ERROR = "?";
 
   /** empty person number */
-  public static final String ENPTY = "";
+  public static final String EMPTY = "";
   
   /** number of parts that consist of one assignment "Novák, Josef, fav, 2014, b, p, something" */
   public static final int NUMBER_OF_PARTS = 7;
